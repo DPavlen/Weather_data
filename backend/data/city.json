@@ -1,0 +1,118 @@
+[
+    {
+      "name": "Москва",
+      "latitude": 55.7558,
+      "longitude": 37.6176
+    },
+    {
+      "name": "Санкт-Петербург",
+      "latitude": 59.9343,
+      "longitude": 30.3351
+    },
+    {
+      "name": "Екатеринбург",
+      "latitude": 56.8389,
+      "longitude": 60.6057
+    },
+    {
+      "name": "Казань",
+      "latitude": 55.7963,
+      "longitude": 49.1088
+    },
+    {
+      "name": "Мадрид",
+      "latitude": 40.4168,
+      "longitude": -3.7038
+    },
+    {
+      "name": "Киев",
+      "latitude": 50.4501,
+      "longitude": 30.5234
+    },
+    {
+      "name": "Стамбул",
+      "latitude": 41.0082,
+      "longitude": 28.9784
+    },
+    {
+      "name": "Париж",
+      "latitude": 48.8566,
+      "longitude": 2.3522
+    },
+    {
+      "name": "Берлин",
+      "latitude": 52.5200,
+      "longitude": 13.4050
+    },
+    {
+      "name": "Лондон",
+      "latitude": 51.5074,
+      "longitude": -0.1278
+    },
+    {
+      "name": "Дублин",
+      "latitude": 53.3498,
+      "longitude": -6.2603
+    },
+    {
+      "name": "Брюссель",
+      "latitude": 50.8503,
+      "longitude": 4.3517
+    },
+    {
+      "name": "Таллин",
+      "latitude": 59.4370,
+      "longitude": 24.7536
+    },
+    {
+      "name": "Рига",
+      "latitude": 56.9496,
+      "longitude": 24.1052
+    },
+    {
+      "name": "Вильнюс",
+      "latitude": 54.6872,
+      "longitude": 25.2797
+    },
+    {
+      "name": "Минск",
+      "latitude": 53.9006,
+      "longitude": 27.5590
+    },
+    {
+      "name": "Варшава",
+      "latitude": 52.2297,
+      "longitude": 21.0122
+    },
+    {
+      "name": "Прага",
+      "latitude": 50.0755,
+      "longitude": 14.4378
+    },
+    {
+      "name": "Лиссабон",
+      "latitude": 38.7223,
+      "longitude": -9.1393
+    },
+    {
+      "name": "Рим",
+      "latitude": 41.9028,
+      "longitude": 12.4964
+    },
+    {
+      "name": "Кишинёв",
+      "latitude": 47.0105,
+      "longitude": 28.8638
+    },
+    {
+      "name": "Бухарест",
+      "latitude": 44.4268,
+      "longitude": 26.1025
+    },
+    {
+      "name": "Прага",
+      "latitude": 50.0755,
+      "longitude": 14.4378
+    }
+
+]

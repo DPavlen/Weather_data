@@ -1,12 +1,23 @@
+import os
 from pathlib import Path
+
+from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-riwah96q2or6edj1&dtt&a-)nh&@jk4x37x_ws)#_5x)2yy)la"
+DB_ENGINE = os.getenv("DB_ENGINE", "sqlite3")
 
-DEBUG = True
+SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
-ALLOWED_HOSTS = []
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(" ")
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 
 INSTALLED_APPS = [
@@ -54,12 +65,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+
+# Подключение к БД sqlite3 или postgresql
+
+if DB_ENGINE == "sqlite3":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+
+if DB_ENGINE == "postgresql":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("POSTGRES_DB", default="django"),
+            "USER": os.getenv("POSTGRES_USER", default="django_user"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="django"),
+            "HOST": os.getenv("DB_HOST", default="doct24_db"),
+            "PORT": os.getenv("DB_PORT", default=5432),
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -86,8 +113,53 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = "static/"
+# Настройка Статики и Медиа backenda
+
+STATIC_URL = "/backend_static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_URL = "/backend_media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Настройка REST_FRAMEWORK
+
+REST_FRAMEWORK = {
+    "DATETIME_FORMAT": "%d.%m.%Y %H:%M:%S",
+
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend"
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+
+    "DATE_INPUT_FORMATS": ["%d.%m.%Y"],
+    "DEFAULT_PAGINATION_CLASS":
+        "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": int(os.getenv("PAGE_SIZE", 10)),
+}
+
+
+# Настройка SPECTACULAR_SETTINGS для SWAGGERA
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Weather_data",
+    "VERSION": "1.0.0",
+    "DESCRIPTION": "Weather_data: Backend",
+    "CONTACT": {
+        "name": "Weather_data",
+        "url": "https://github.com/DPavlen/Weather_data",
+        "email": "jobpavlenko@yandex.ru",
+    },
+    "COMPONENT_SPLIT_REQUEST": True,
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SCHEMA_COERCE_PATH_PK_SUFFIX": True,
+    "SORT_OPERATIONS": True,
+    "SCHEMA_PATH_PREFIX": r"/api/",
+}
 
 
