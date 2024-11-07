@@ -67,21 +67,10 @@ ordering_parameter = OpenApiParameter(
     location=OpenApiParameter.QUERY,
     required=False,
     description=(
-        "Сортировка по полям: 'city' ; 'request_time' ; "
+        "Сортировка по полям: 'city__name' ; 'request_time' ; "
         " Добавьте префикс '-' для сортировки по убыванию. "
     ),
 )
-# Параметр ordering_parameter для сортировки поля ordering
-search_parameter = OpenApiParameter(
-    name="city",
-    type=str,
-    location=OpenApiParameter.QUERY,
-    required=False,
-    description=(
-        "Поиск по полю имя города: 'city__name' ;"
-    ),
-)
-
 
 WEATHER_HISTORY_SCHEMA = {
     "list": extend_schema(
@@ -92,7 +81,6 @@ WEATHER_HISTORY_SCHEMA = {
             limit_parameter,
             offset_parameter,
             ordering_parameter,
-            search_parameter
         ],
     ),
     "retrieve": extend_schema(

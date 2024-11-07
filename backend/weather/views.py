@@ -12,6 +12,7 @@ from rest_framework.response import Response
 
 from weather.filters import WeatherHistoryFilter
 from weather.models import City, WeatherHistory
+from weather.pagination import PaginationCust
 from weather.schemas import CITY_SCHEMA, WEATHER_HISTORY_SCHEMA, WEATHER_CITY_SCHEMA
 from weather.serializers import (
     CitySerializer,
@@ -29,6 +30,7 @@ class CityViewset(viewsets.ModelViewSet):
 
     queryset = City.objects.all()
     serializer_class = CitySerializer
+    pagination_class = PaginationCust
 
 
 @extend_schema_view(**WEATHER_HISTORY_SCHEMA)
@@ -40,8 +42,8 @@ class WeatherHistoryViewset(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     filterset_class = WeatherHistoryFilter
     ordering_fields = ("city__name", "request_type")
-    ordering = ("city__name",)
     search_fields = ("city__name",)
+    pagination_class = PaginationCust
 
 
 @extend_schema_view(**WEATHER_CITY_SCHEMA)
@@ -50,8 +52,6 @@ class WeatherCityViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     queryset = City.objects.all()
     serializer_class = WeatherSerializer
-    filter_backends = (DjangoFilterBackend, SearchFilter)
-    search_fields = ("name",)
 
     def list(self, request, *args, **kwargs):
         """Получение по городу: температуры,

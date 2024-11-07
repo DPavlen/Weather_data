@@ -22,6 +22,8 @@ CORS_ALLOW_CREDENTIALS = True
 YANDEX_API_WEATHER_KEY = os.getenv("YANDEX_API_WEATHER_KEY")
 YANDEX_WEATHER_URL = os.getenv("YANDEX_WEATHER_URL",)
 
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://your-redis-server:6379/0'
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -46,8 +48,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # "querycount.middleware.QueryCountMiddleware",
 ]
-
 ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
@@ -141,9 +143,9 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 
     "DATE_INPUT_FORMATS": ["%d.%m.%Y"],
-    "DEFAULT_PAGINATION_CLASS":
-        "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": int(os.getenv("PAGE_SIZE", 10)),
+    # "DEFAULT_PAGINATION_CLASS":
+    #     "rest_framework.pagination.LimitOffsetPagination",
+    # "PAGE_SIZE": int(os.getenv("PAGE_SIZE", 10)),
 }
 
 

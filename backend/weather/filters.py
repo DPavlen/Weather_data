@@ -13,8 +13,8 @@ class WeatherHistoryFilter(filters.FilterSet):
         field_name="request_type",
         lookup_expr="istartswith",
         label="Название Типа запроса",
-        help_text="Введите тип запроса(Веб или Телеграм), например 'Те', "
-                  "получим: Телеграм."
+        help_text="Введите тип запроса(web, telegram), например 'te', "
+                  "получим все запросы с типом: Телеграм."
     )
 
     class Meta:
