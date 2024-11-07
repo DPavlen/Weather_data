@@ -19,6 +19,9 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(" ")
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
+YANDEX_API_WEATHER_KEY = os.getenv("YANDEX_API_WEATHER_KEY")
+YANDEX_WEATHER_URL = os.getenv("YANDEX_WEATHER_URL",)
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -161,5 +164,3 @@ SPECTACULAR_SETTINGS = {
     "SORT_OPERATIONS": True,
     "SCHEMA_PATH_PREFIX": r"/api/",
 }
-
-
