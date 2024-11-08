@@ -1,4 +1,5 @@
 import logging
+from datetime import timezone
 
 import requests
 from django.core.cache import cache
@@ -65,6 +66,16 @@ class WeatherCityViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         city = get_object_or_404(City, name=city_name)
+
+        # Определяем тип запроса (например, по умолчанию "Web")
+        request_type = "Web" if request.user.is_authenticated else "Telegram"
+
+        # Создаем запись в истории запросов
+        WeatherHistory.objects.create(
+            city=city,
+            request_type=request_type,
+        )
+
         cached_data = cache.get(f"weather_{city_name}")
         if cached_data:
             return Response(cached_data)
