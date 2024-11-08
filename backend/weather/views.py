@@ -19,6 +19,7 @@ from weather.serializers import (
     WeatherHistorySerializer, WeatherSerializer,
 )
 from weather.services import get_weather_yandex
+from weather.tasks import update_weather_data
 
 
 logger = logging.getLogger(__name__)
@@ -57,7 +58,6 @@ class WeatherCityViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
         """Получение по городу: температуры,
         атмосферное давление, скорость ветра"""
 
-        # city_name = request.GET.get("city")
         city_name: str = request.GET.get("city",).title()
         if not city_name:
             return Response({
@@ -65,7 +65,11 @@ class WeatherCityViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         city = get_object_or_404(City, name=city_name)
+        cached_data = cache.get(f"weather_{city_name}")
+        if cached_data:
+            return Response(cached_data)
 
+        update_weather_data.delay(city.id)
         try:
             response = self.get_serializer(get_weather_yandex(city)).data
         except Exception as e:

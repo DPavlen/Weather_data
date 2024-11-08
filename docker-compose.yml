@@ -8,7 +8,6 @@ networks:
   weather_data:
     driver: bridge
 
-
 services:
 
   db:
@@ -48,5 +47,26 @@ services:
       - ./infra/nginx.conf:/etc/nginx/conf.d/default.conf
       - backend_static:/backend_static/
       - backend_media:/backend_media/
+    networks:
+      - weather_data
+
+  redis:
+    container_name: cache
+    image: redis:7.0.8-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - weather_data
+
+  flower:
+    image: mher/flower:0.9.7
+    ports:
+      - "5555:5555"
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: CELERY_RESULT_BACKEND = 'redis://redis-server:6379/0'
+    depends_on:
+      - redis
+      - backend
     networks:
       - weather_data
