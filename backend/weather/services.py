@@ -1,11 +1,19 @@
+from django.core.cache import cache
 from typing import Dict, Any, Union
 import requests
 from backend.settings import YANDEX_API_WEATHER_KEY, YANDEX_WEATHER_URL
 from weather.models import City
 
 
+local_weather_cache: Dict[str, Dict[str, Union[str, int]]] = {}
+
+
 def get_weather_yandex(city: City) -> Dict[str, Union[str, int]]:
     """Получает данные о погоде для города через API Яндекса.."""
+
+    # Проверяем наличие данных в локальном кэше
+    if city.name in local_weather_cache:
+        return local_weather_cache[city.name]
 
     headers = {
         "X-Yandex-Weather-Key": YANDEX_API_WEATHER_KEY,
@@ -14,7 +22,7 @@ def get_weather_yandex(city: City) -> Dict[str, Union[str, int]]:
         "lat": city.latitude,
         "lon": city.longitude,
     }
-    # Запрос о погоде
+
     response = requests.get(YANDEX_WEATHER_URL, headers=headers, params=params)
     response.raise_for_status()
 
@@ -22,6 +30,10 @@ def get_weather_yandex(city: City) -> Dict[str, Union[str, int]]:
     data: Dict[str, Union[str, int]] = response.json().get("fact")
     weather_data: Dict[str, Union[str, int]] = parse_data(data)
     weather_data["city_name"] = city.name
+
+    # Save данные в локальный и глобальный кэш
+    local_weather_cache[city.name] = weather_data
+    cache.set(f"weather_{city.name}", weather_data, timeout=60 * 30)
 
     return weather_data
 
