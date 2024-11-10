@@ -70,3 +70,19 @@ services:
       - backend
     networks:
       - weather_data
+
+  bot:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+#    environment:
+#      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+#      WEATHER_API_URL: http://backend:8000/api/weather_city/
+#      YANDEX_API_WEATHER_KEY: ${YANDEX_API_WEATHER_KEY}
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - weather_data

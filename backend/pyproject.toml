@@ -35,6 +35,9 @@ django-model-utils = "^4.5.1"
 django-colorfield = "0.10.1"
 faker = "^30.1.0"
 requests = "^2.32.3"
+aiogram = "^3.14.0"
+httpx = "^0.27.2"
+executor = "^23.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"

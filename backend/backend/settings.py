@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     "drf_spectacular_sidecar",
     "django_filters",
     "weather.apps.WeatherConfig",
+    "corsheaders",
 
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
