@@ -43,8 +43,7 @@ ENTRYPOINT ["bash", "-c", "\
     poetry run python manage.py collectstatic --noinput && \
     poetry run python manage.py add_user && \
     poetry run python manage.py add_city && \
-    poetry run wait-for-it db:5432 --timeout=10 && \
+    sleep 5 && \
+    poetry run python bot/weather_bot.py & \
     poetry run celery --app=backend worker -l INFO & \
-    poetry run gunicorn --bind 0.0.0.0:8000 --reload backend.wsgi:application & \
-    sleep 10 && \
-    poetry run python bot/weather_bot.py"]
+    poetry run gunicorn --bind 0.0.0.0:8000 backend.wsgi:application --reload"]

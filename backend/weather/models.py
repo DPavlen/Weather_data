@@ -12,12 +12,16 @@ class City(models.Model):
     latitude = models.DecimalField(
         "Широта",
         max_digits=9,
-        decimal_places=6
+        decimal_places=6,
+        blank=True,
+        null=True,
     )
     longitude = models.DecimalField(
         "Долгота",
         max_digits=9,
-        decimal_places=6
+        decimal_places=6,
+        blank=True,
+        null=True,
     )
     created = models.DateTimeField(
         auto_now_add=True,
@@ -65,4 +69,4 @@ class WeatherHistory(models.Model):
         ordering = ("request_time",)
 
     def __str__(self):
-        return f"{self.city.name} - {self.request_time}"
+        return f"{self.city.name} - {self.request_type}"

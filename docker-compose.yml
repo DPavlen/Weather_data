@@ -51,7 +51,6 @@ services:
       - weather_data
 
   redis:
-    container_name: cache
     image: redis:7.0.8-alpine
     ports:
       - "6379:6379"
@@ -64,7 +63,7 @@ services:
       - "5555:5555"
     environment:
       CELERY_BROKER_URL: "redis://redis:6379/0"
-      CELERY_RESULT_BACKEND: "redis://redis-server:6379/0"
+      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
     depends_on:
       - redis
       - backend
