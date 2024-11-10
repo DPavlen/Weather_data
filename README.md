@@ -67,6 +67,17 @@ __Реализован телеграм бота, который после на
 - Скорость ветра: 3.1 м/с
 - Влажность: 78%
 
+Примеры работы приложения Django-API and Telegram-bota.
+![image](https://github.com/user-attachments/assets/fe7bf9a0-a0cc-4a98-bd79-0052065acbb5)
+![image](https://github.com/user-attachments/assets/19aef3af-4e66-4b1f-8491-90fb6d2cf271)
+![image](https://github.com/user-attachments/assets/3df4a7ad-720e-4e28-ada9-5ef016416778)
+![image](https://github.com/user-attachments/assets/e2246f9b-e64b-4b4a-bc3b-b7dbf96fdcbf)
+![image](https://github.com/user-attachments/assets/fb1b88d1-abe0-4015-bf38-dbd5bc96a6cb)
+![image](https://github.com/user-attachments/assets/31ae7a4a-595c-41bb-b4d9-ac82ed1f976a)
+
+
+
+
 ## 3. Стек технологий <a id=3></a>
 [![Django](https://img.shields.io/badge/Django-5.0.2-6495ED)](https://www.djangoproject.com) 
 [![Djangorestframework](https://img.shields.io/badge/djangorestframework-3.14.0-6495ED)](https://www.django-rest-framework.org/) 
