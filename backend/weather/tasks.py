@@ -8,6 +8,12 @@ from weather.services import get_weather_yandex
 
 @shared_task
 def update_weather_data(city_id):
+    """
+    Обновляет данные о погоде для указанного города и сохраняет их в кэш.
+    Данные кэшируются на 30 минут.
+    Возвращает сообщение о результате операции.
+    """
+
     city = City.objects.get(id=city_id)
     try:
         weather_data = get_weather_yandex(city)

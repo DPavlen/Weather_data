@@ -57,7 +57,7 @@ class WeatherCityViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     def list(self, request, *args, **kwargs):
         """Получение по городу: температуры,
-        атмосферное давление, скорость ветра"""
+        атмосферное давление, скорость ветра, влажность"""
 
         city_name: str = request.GET.get("city",).title()
         if not city_name:

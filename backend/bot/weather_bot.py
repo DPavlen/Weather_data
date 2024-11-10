@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import logging
 import os
 import sys
@@ -54,11 +55,15 @@ async def get_weather(message: Message):
     city_name = message.text.title()
     logger.info(f"Пользователь {message.from_user.username}"
                 f" запрошенная погода для города: {city_name}")
+    current_date = datetime.datetime.now().strftime("%d.%m.%Y")
+
     try:
         response = requests.get(f"{WEATHER_API_URL}?city={city_name}")
+        response.raise_for_status()
         if response.status_code == 200:
             weather_data = response.json()
             weather_text = (
+                f"Сегодня {current_date}\n"
                 f"Погода в {city_name}:\n"
                 f"Температура: {weather_data['temp']}°C\n"
                 f"Атмосферное давление: {weather_data['pressure_mm']} мм рт. ст.\n"
