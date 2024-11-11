@@ -74,8 +74,7 @@ __Реализован телеграм бота, который после на
 ![image](https://github.com/user-attachments/assets/e2246f9b-e64b-4b4a-bc3b-b7dbf96fdcbf)
 ![image](https://github.com/user-attachments/assets/fb1b88d1-abe0-4015-bf38-dbd5bc96a6cb)
 ![image](https://github.com/user-attachments/assets/31ae7a4a-595c-41bb-b4d9-ac82ed1f976a)
-
-
+![image](https://github.com/user-attachments/assets/e9ab0c43-e130-48d0-a296-3e87404a4433)
 
 
 
@@ -184,9 +183,11 @@ sudo docker exec -it weather_data-backend-1 /bin/bash
 ```shell
 И далее внутри контейнера :/app# pytest
 Пример вывода при успешном выполнении тестов:
-tests/test_models.py ........                                                                                                                                                           [ 44%]
-tests/test_services.py .                                                                                                                                                                [ 50%]
-tests/test_views.py .......
+tests/test_models.py ........                                                                                                             [ 38%]
+tests/test_serializers.py ...                                                                                                             [ 52%]
+tests/test_services.py .                                                                                                                  [ 57%]
+tests/test_views.py .........                                                                                                             [100%]
+============================================================== 21 passed in 1.65s ===============================================================
 ```
 
 >**Примечание.** Запускаем собраный уже ранее командой:
